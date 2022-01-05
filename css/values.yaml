@@ -1,6 +1,21 @@
 # Default values for css.
 # This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+
+### Declare what css config to use
+# Default to using the default bundled config.
+config:
+  ### Config options are: default, file, dynamic (more to be added)
+  bundled: default
+  # One can declare a configmap name from which a custom JSON-LD config can be loaded into css
+  configMapName: ""
+
+### Log level: debug, info, warn, error
+logLevel: info
+
+persistence:
+  enabled: false
+  storageClassName: ""
+  requestSize: 512Mi
 
 replicaCount: 1
 
@@ -44,12 +59,8 @@ ingress:
   enabled: false
   className: ""
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
   host: chart-example.local
   path: /
-  pathType: ImplementationSpecific
-          
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

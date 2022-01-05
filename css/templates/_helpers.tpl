@@ -65,7 +65,7 @@ Create the name of the service account to use
 {{- if .Values.ingress.enabled }}
 {{- printf "%s%s%s" "http://" .Values.ingress.host .Values.ingress.path}}
 {{- else }}
-{{- "http://localhost:3000" -}}
+{{- "http://localhost:3000/" -}}
 {{- end }}
 {{- end }}
 

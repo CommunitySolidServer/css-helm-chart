@@ -30,12 +30,34 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          args: ["-l", "debug", "-b", "{{ include "css.baseUrl" . }}"]
+          args: 
+            - "-l"
+            - "{{ .Values.logLevel}}"
+            - "-b"
+            - "{{ include "css.baseUrl" . }}"
+            - "-t"
+            {{- with .Values.config}}
+            - "-c"
+            {{- if not .configMapName }}
+            - "@css:config/{{.bundled}}.json"
+            {{- else }}
+            - "/config/custom-config.json"
+            {{- end }}
+            {{- end }}
+            {{- if .Values.persistence.enabled }}
+            - "-f"
+            - "/data/"
+            {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 3000
               protocol: TCP
+          {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          {{- end}}
           # livenessProbe:
           #   httpGet:
           #     path: /
@@ -46,6 +68,12 @@ spec:
           #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "css.fullname" . }}-data
+      {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
