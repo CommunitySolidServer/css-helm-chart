@@ -61,11 +61,14 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
+{{/*
+Pass a correct baseUrl
+*/}}
 {{- define "css.baseUrl" -}}
 {{- if .Values.ingress.enabled }}
-{{- printf "%s%s%s" "http://" .Values.ingress.host .Values.ingress.path}}
+{{- printf "https://%s%s" .Values.ingress.host .Values.ingress.path}}
 {{- else }}
-{{- "http://localhost:3000/" -}}
+{{- printf "%http://%s.%s/" .Release.Namespace ( include "css.fullname" . ) }}
 {{- end }}
 {{- end }}
 
