@@ -8,9 +8,14 @@ config:
   bundled: default
   # One can declare a configmap name from which a custom JSON-LD config can be loaded into css
   configMapName: ""
+  configMapKey: ""
 
 ### Log level: debug, info, warn, error
 logLevel: info
+
+### From the helm config, an appropriate --baseUrl value will be passed to the community server
+### If however you wish to override this set this parameter appropriately.
+baseUrlOverride: ""
 
 persistence:
   enabled: false
@@ -38,22 +43,10 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
 service:
   type: ClusterIP
   port: 80
+  nodePort: ""
 
 ingress:
   enabled: false
@@ -67,16 +60,25 @@ ingress:
   #      - chart-example.local
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
 
 nodeSelector: {}
 

@@ -65,7 +65,9 @@ Create the name of the service account to use
 Pass a correct baseUrl
 */}}
 {{- define "css.baseUrl" -}}
-{{- if .Values.ingress.enabled }}
+{{- if .Values.baseUrlOverride }}
+{{- .Values.baseUrlOverride }}
+{{- else if .Values.ingress.enabled }}
 {{- printf "https://%s%s" .Values.ingress.host .Values.ingress.path}}
 {{- else }}
 {{- printf "%http://%s.%s/" .Release.Namespace ( include "css.fullname" . ) }}
