@@ -35,13 +35,15 @@ spec:
             - "{{ .Values.logLevel}}"
             - "-b"
             - "{{ include "css.baseUrl" . }}"
+            {{- if .Values.showStacktrace }}
             - "-t"
+            {{- end }}
             {{- with .Values.config}}
             - "-c"
             {{- if not .configMapName }}
             - "@css:config/{{.bundled}}.json"
             {{- else }}
-            - "/config/custom-config.json"
+            - "/config/{{ .configMapKey }}"
             {{- end }}
             {{- end }}
             {{- if .Values.persistence.enabled }}
@@ -53,26 +55,30 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
-          {{- if .Values.persistence.enabled }}
-          volumeMounts:
-            - mountPath: /data
-              name: data
-          {{- end}}
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if .Values.persistence.enabled }}
+          volumeMounts:
+          {{- if .Values.persistence.enabled }}
+            - name: data
+              mountPath: /data
+          {{- end}}
+          {{- if .Values.config.configMapName }}
+            - name: config
+              mountPath: /config
+          {{- end }}
       volumes:
+      {{- if .Values.persistence.enabled }}
         - name: data
           persistentVolumeClaim:
             claimName: {{ include "css.fullname" . }}-data
+      {{- end}}
+      {{- if .Values.config.configMapName }}
+        - name: config
+          configMap:
+            name: {{ .Values.config.configMapName }}
+            items:
+              - key: {{ .Values.config.configMapKey }}
+                path: {{ .Values.config.configMapKey }}
       {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:

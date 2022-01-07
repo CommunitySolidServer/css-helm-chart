@@ -12,6 +12,8 @@ config:
 
 ### Log level: debug, info, warn, error
 logLevel: info
+### Enables detailed logging on error pages.
+showStacktrace: false
 
 ### From the helm config, an appropriate --baseUrl value will be passed to the community server
 ### If however you wish to override this set this parameter appropriately.
