@@ -1,8 +1,41 @@
-# Default values for css.
-# This is a YAML-formatted file.
+## Solid Community Server image
+## @param image.registry CSS image registry
+## @param image.repository CSS image repository
+## @param image.tag CSS image tag (immutable tags are recommended)
+## @param image.pullPolicy CSS image pull policy
+## @param image.pullSecrets Specify docker-registry secret names as an array
+##
+image:
+  registry: docker.io
+  repository: jveessen/css
+  tag: 2.0.1
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets (secrets must be manually created in the namespace)
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## Example:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: []
 
-### Declare what css config to use
-# Default to using the default bundled config.
+## @section Common parameters
+## @param nameOverride String to partially override css.fullname
+##
+nameOverride: ""
+## @param fullnameOverride String to fully override css.fullname
+##
+fullnameOverride: ""
+
+## @section Solid Community Server parameters
+## Solid/community-server, ref: https://github.com/solid/community-server
+
+## @param config.bundled Use one of the bundled configs (options: default, file, sparlql-endpoint, etc.)
+## @param config.configMapName Name of configMap holding a custom css config
+## @param config.configMapKey Key for the configfile to be used from the configMap
 config:
   ### Config options are: default, file, dynamic (more to be added)
   bundled: default
@@ -10,70 +43,138 @@ config:
   configMapName: ""
   configMapKey: ""
 
-### Log level: debug, info, warn, error
+## @param logLevel Log level: silly, debug, verbose, info, warn, error
 logLevel: info
-### Enables detailed logging on error pages.
+## @param showStacktrace Enables detailed logging on error pages.
 showStacktrace: false
 
-### From the helm config, an appropriate --baseUrl value will be passed to the community server
-### If however you wish to override this set this parameter appropriately.
+## @param baseUrlOverride From the helm config, an appropriate --baseUrl value will be passed to the community server. If however you wish to override this set this parameter appropriately.
 baseUrlOverride: ""
 
+## Enable persistence using Persistent Volume Claims
+## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+##
 persistence:
+  ## @param persistence.enabled Enable persistence on CSS using a `PersistentVolumeClaim`. If false, use emptyDir
+  ##
   enabled: false
-  storageClassName: ""
-  requestSize: 512Mi
+  ## @param persistence.existingClaim Name of an existing `PersistentVolumeClaim` for CSS replicas
+  ## NOTE: When it's set the rest of persistence parameters are ignored
+  ##
+  existingClaim: ""
+  ## @param persistence.subPath Subdirectory of the volume to mount at (mostly useful when using an existing claim)
+  ##
+  subPath: ""
+  ## @param persistence.storageClass CSS persistent volume storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  storageClass: ""
+  ## @param persistence.size CSS persistent volume size
+  ##
+  size: 128Mi
+  ## @param persistence.selector Selector to match an existing Persistent Volume
+  ## selector:
+  ##   matchLabels:
+  ##     app: my-app
+  ##
+  selector: {}
 
-replicaCount: 1
-
-image:
-  repository: jveessen/css
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
+## CSS Kubernetes service parameters
 service:
+  ## @param service.type CSS Kubernetes service type
+  ##
   type: ClusterIP
+  ## @param service.port CSS Kubernetes service port
+  ##
   port: 80
+  ## @param service.nodePort CSS Kubernetes service node port, only relevant when service.type == `NodePort`
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
   nodePort: ""
 
+# ingress:
+#   enabled: false
+#   className: ""
+#   annotations: {}
+#   host: chart-example.local
+#   path: /
+#   tls: []
+#   #  - secretName: chart-example-tls
+#   #    hosts:
+#   #      - chart-example.local
+
+## Configure the ingress resource that allows you to access the
+## CSS installation. Set up the URL
+## ref: https://kubernetes.io/docs/user-guide/ingress/
+##
 ingress:
+  ## @param ingress.enabled Set to true to enable ingress record generation
+  ##
   enabled: false
-  className: ""
-  annotations: {}
-  host: chart-example.local
+
+  ## @param ingress.host When the ingress is enabled, a host pointing to this will be created
+  ##
+  host: CSS.local
+  ## @param ingress.path Default path for the ingress resource
+  ## The Path to CSS. You may need to set this to '/*' in order to use this with ALB ingress controllers.
+  ##
   path: /
+  ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
+  ## For a full list of possible ingress annotations, please see
+  ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+  ## Use this parameter to set the required annotations for cert-manager, see
+  ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
+  ##
+  ## e.g:
+  ## annotations:
+  ##   kubernetes.io/ingress.class: nginx
+  ##   cert-manager.io/cluster-issuer: cluster-issuer-name
+  annotations: {}
+  ## @param ingress.tls TLS Configuration
+    ##
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  ## @param ingress.ingressClassName IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)
+  ##
+  ingressClassName: ""
 
-resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# resources: {}
+#   # limits:
+#   #   cpu: 100m
+#   #   memory: 128Mi
+#   # requests:
+#   #   cpu: 100m
+#   #   memory: 128Mi
 
+## CSS containers' resource requests and limits
+## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+## We usually recommend not to specify default resources and to leave this as a conscious
+## choice for the user. This also increases chances charts run on environments with little
+## resources, such as Minikube. If you do want to specify resources, uncomment the following
+## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+## @param resources.limits The resources limits for CSS containers
+## @param resources.requests The requested resources for CSS containers
+resources:
+  ## Example:
+  ## limits:
+  ##    cpu: 500m
+  ##    memory: 1Gi
+  limits: {}
+  ## Examples:
+  ## requests:
+  ##    cpu: 250m
+  ##    memory: 256Mi
+  requests: {}
+
+## @param podAnnotations CSS Pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
 podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
+## @param securityContext Security Context for CSS Container
+##
 securityContext: {}
   # capabilities:
   #   drop:
@@ -81,9 +182,18 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-
+## @param podSecurityContext Security Context for CSS Pod
+##
+podSecurityContext: {}
+  # fsGroup: 2000
+## @param nodeSelector Node labels for pod assignment
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
 nodeSelector: {}
-
+## @param tolerations Tolerations for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
 tolerations: []
-
+## @param affinity Affinity for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 affinity: {}

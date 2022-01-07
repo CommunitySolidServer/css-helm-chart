@@ -73,4 +73,3 @@ Pass a correct baseUrl
 {{- printf "%http://%s.%s/" .Release.Namespace ( include "css.fullname" . ) }}
 {{- end }}
 {{- end }}
-

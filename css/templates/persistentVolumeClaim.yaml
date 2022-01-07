@@ -11,5 +11,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.persistence.requestSize }}
+      storage: {{ .Values.persistence.size | quote }}
 {{- end }}

@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "css.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       {{- include "css.selectorLabels" . | nindent 6 }}
@@ -22,14 +22,16 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "css.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          {{- $appVersion := .Chart.AppVersion -}}
+          {{- with .Values.image }}
+          image: "{{.registry}}/{{ .repository }}:{{ .tag | default $appVersion }}"
+          {{- end}}
           args: 
             - "-l"
             - "{{ .Values.logLevel}}"
@@ -58,20 +60,16 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-          {{- if .Values.persistence.enabled }}
             - name: data
               mountPath: /data
-          {{- end}}
+              {{- if .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
           {{- if .Values.config.configMapName }}
             - name: config
               mountPath: /config
           {{- end }}
       volumes:
-      {{- if .Values.persistence.enabled }}
-        - name: data
-          persistentVolumeClaim:
-            claimName: {{ include "css.fullname" . }}-data
-      {{- end}}
       {{- if .Values.config.configMapName }}
         - name: config
           configMap:
@@ -79,6 +77,18 @@ spec:
             items:
               - key: {{ .Values.config.configMapKey }}
                 path: {{ .Values.config.configMapKey }}
+      {{- end}}
+      {{- if and .Values.persistence.enabled .Values.persistence.existingClaim }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ tpl .Values.persistence.existingClaim . }}
+      {{- else if not .Values.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+      {{- else if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "css.fullname" . }}-data
       {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
