@@ -1,7 +1,10 @@
 # Deploying Solid Community Server
 ## TL;DR
-helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+git clone https://github.com/idlab-gent/css-helm-chart.git
+cd css-helm-chart
 helm install my-release css
+```
 ## Introduction
 This chart bootstraps a [Solid Community Server](https://github.com/solid/community-server) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
