@@ -35,10 +35,6 @@ helm delete my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
-## Workarounds for standing issues
-Use `baseUrlOverride` to set it to `http://localhost:3000/`, deploy and use port-forwarding to connect to your Solid App over localhost.
-`kubectl port-forward <css-pod> 3000:3000`
-
 ## Parameters
 
 ### Image parameters
@@ -176,3 +172,9 @@ config:
     configMapName: my-configmap
     configMapKey: my-config.json
 ```
+
+## Workarounds for standing issues
+As of now, the login flow seems to only work over localhost. A temporary workaround to get going:
+
+Set `baseUrlOverride` to `http://localhost:3000/`, deploy and use port-forwarding to connect to your Solid App over localhost.
+`kubectl port-forward <css-pod> 3000:3000`
