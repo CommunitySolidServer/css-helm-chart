@@ -9,9 +9,9 @@ helm install my-release css
 This chart bootstraps a [Solid Community Server](https://github.com/solid/community-server) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
-Kubernetes 1.19+
-Helm 3.2.0+
-PV provisioner support in the underlying infrastructure if you want to use Persistence functionality.
+- Kubernetes 1.19+
+- Helm 3.2.0+
+- PV provisioner support in the underlying infrastructure if you want to use Persistence functionality.
 
 ## Installing the Chart
 To install the chart with the release name my-release:
