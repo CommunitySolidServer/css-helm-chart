@@ -3,11 +3,33 @@ entries:
   css:
   - apiVersion: v2
     appVersion: 2.0.1
-    created: "2022-01-27T09:48:26.325613985+01:00"
+    created: "2022-01-27T11:28:05.913147413+01:00"
     description: The Community Solid Server is open software that provides you with
       a Solid Pod and identity. This Pod acts as your own personal storage space so
       you can share data with people and Solid applications.
-    digest: 52fa8c1cdee625deec144814de9c2a7294a38f75d0668055a8e99136556f5724
+    digest: b4b29904db8c1ebc89f558ba297e9628006ef3c266b379cb707003b731a64d70
+    home: https://github.com/idlab-gent/css-helm-chart
+    icon: https://raw.githubusercontent.com/solid/community-server/main/templates/images/solid.svg
+    keywords:
+    - solid
+    - pod
+    maintainers:
+    - email: jasper.vaneessen@ugent.be
+      name: jveessen
+    name: css
+    sources:
+    - https://github.com/solid/community-server
+    type: application
+    urls:
+    - css-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2.0.1
+    created: "2022-01-27T11:28:05.91248961+01:00"
+    description: The Community Solid Server is open software that provides you with
+      a Solid Pod and identity. This Pod acts as your own personal storage space so
+      you can share data with people and Solid applications.
+    digest: f00c7a602a5b6916cc00d7ff90ac0f17092c0b6bcc25492b24ddaff0673105fd
     home: https://github.com/idlab-gent/css-helm-chart
     icon: https://raw.githubusercontent.com/solid/community-server/main/templates/images/solid.svg
     keywords:
@@ -23,4 +45,4 @@ entries:
     urls:
     - css-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-27T09:48:26.324125397+01:00"
+generated: "2022-01-27T11:28:05.910833873+01:00"
