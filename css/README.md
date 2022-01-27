@@ -1,9 +1,8 @@
 # Deploying Community Solid Server
 ## TL;DR
 ```
-git clone https://github.com/idlab-gent/css-helm-chart.git
-cd css-helm-chart
-helm install my-release css
+helm repo add idlab-gent https://idlab-gent.github.io/css-helm-chart/charts/
+helm install my-css idlab-gent/css
 ```
 ## Introduction
 This chart bootstraps a [Community Solid Server](https://github.com/solid/community-server) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -14,12 +13,11 @@ This chart bootstraps a [Community Solid Server](https://github.com/solid/commun
 - PV provisioner support in the underlying infrastructure if you want to use Persistence functionality.
 
 ## Installing the Chart
-To install the chart with the release name my-release:
+To install the chart with the release name my-css:
 
 ```
-git clone https://github.com/idlab-gent/css-helm-chart.git
-cd css-helm-chart
-helm install my-release css
+helm repo add idlab-gent https://idlab-gent.github.io/css-helm-chart/charts/
+helm install my-css idlab-gent/css
 ```
 
 These commands deploy Community Solid Server on the Kubernetes cluster in the default configuration. The Parameters section lists the parameters that can be configured during installation.
@@ -27,10 +25,10 @@ These commands deploy Community Solid Server on the Kubernetes cluster in the de
 > Tip: List all releases using `helm list`
 
 ## Uninstalling the Chart
-To uninstall/delete the my-release deployment:
+To uninstall/delete the my-css deployment:
 
 ```
-helm delete my-release
+helm delete my-css
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -117,23 +115,23 @@ The command removes all the Kubernetes components associated with the chart and 
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 ```
-helm install my-release \
+helm install my-css \
   --set config.bundled=file \
-  css
+  idlab-gent/css
 ```
 The above command deploys Community Solid Server with the bundled `file` config.
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```
-helm install my-release -f values.yaml css
+helm install my-css -f values.yaml idlab-gent/css
 ```
 > Tip: You can use the default values.yaml
 
 You can even mix these two modes to override values from your YAML file with the `--set` argument. For example,
 
 ```
-helm install my-release -f values.yaml --set config.bundled=file css
+helm install my-css -f values.yaml --set config.bundled=file idlab-gent/css
 ```
 > This can be useful when trying out config changes or to enable debug logging for temporarily.
 
