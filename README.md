@@ -1,4 +1,4 @@
-# Deploying Solid Community Server
+# Deploying Community Solid Server
 ## TL;DR
 ```
 git clone https://github.com/idlab-gent/css-helm-chart.git
@@ -6,7 +6,7 @@ cd css-helm-chart
 helm install my-release css
 ```
 ## Introduction
-This chart bootstraps a [Solid Community Server](https://github.com/solid/community-server) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a [Community Solid Server](https://github.com/solid/community-server) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 - Kubernetes 1.19+
@@ -22,7 +22,7 @@ cd css-helm-chart
 helm install my-release css
 ```
 
-These commands deploy Solid Community Server on the Kubernetes cluster in the default configuration. The Parameters section lists the parameters that can be configured during installation.
+These commands deploy Community Solid Server on the Kubernetes cluster in the default configuration. The Parameters section lists the parameters that can be configured during installation.
 
 > Tip: List all releases using `helm list`
 
@@ -56,7 +56,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `fullnameOverride` | String to fully override css.fullname     | `""`  |
 
 
-### Solid Community Server parameters
+### Community Solid Server parameters
 
 | Name                   | Description                                                                                                                                                         | Value     |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -121,7 +121,7 @@ helm install my-release \
   --set config.bundled=file \
   css
 ```
-The above command deploys Solid Community Server with the bundled `file` config.
+The above command deploys Community Solid Server with the bundled `file` config.
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 

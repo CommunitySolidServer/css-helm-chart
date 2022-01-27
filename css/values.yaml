@@ -1,4 +1,4 @@
-## Solid Community Server image
+## Community Solid Server image
 ## @section Image parameters
 ## @param image.registry CSS image registry
 ## @param image.repository CSS image repository
@@ -31,7 +31,7 @@ nameOverride: ""
 ##
 fullnameOverride: ""
 
-## @section Solid Community Server parameters
+## @section Community Solid Server parameters
 ## Solid/community-server, ref: https://github.com/solid/community-server
 
 ## @param config.bundled Use one of the bundled configs (options: default, file, sparlql-endpoint, etc.)

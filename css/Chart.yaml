@@ -1,6 +1,6 @@
 apiVersion: v2
 name: css
-description: A Helm chart for Kubernetes
+description: The Community Solid Server is open software that provides you with a Solid Pod and identity. This Pod acts as your own personal storage space so you can share data with people and Solid applications.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -22,3 +22,14 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "2.0.1"
+
+home: https://github.com/idlab-gent/css-helm-chart
+icon: https://raw.githubusercontent.com/solid/community-server/main/templates/images/solid.svg
+keywords:
+  - solid
+  - pod
+maintainers:
+  - email: jasper.vaneessen@ugent.be
+    name: jveessen
+sources:
+  - https://github.com/solid/community-server
