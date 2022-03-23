@@ -181,3 +181,8 @@ tolerations: []
 ## @param affinity Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 affinity: {}
+
+
+## @param sparql.enabled Enable a default Sparql endpoint (WIP)
+sparql:
+  enabled: false
