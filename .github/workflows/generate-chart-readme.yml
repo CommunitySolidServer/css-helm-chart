@@ -32,11 +32,12 @@ jobs:
       - name: Install readme-generator-for-helm dependencies
         run: cd readme-generator-for-helm && npm install
 
-      - name: Checkout bitnami/charts
+      - name: Checkout css-helm-chart
         uses: actions/checkout@v2
 
       - name: Execute readme-generator-for-helm
-        run: readme-generator --values community-solid-server/values.yaml --readme community-solid-server/README.md
+        run: readme-generator-for-helm/bin/index.js --values community-solid-server/values.yaml --readme community-solid-server/README.md
+      
       - name: Commit and push changes
         run: |
           git config --global user.name "readme-generator"

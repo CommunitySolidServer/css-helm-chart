@@ -185,4 +185,4 @@ affinity: {}
 
 ## @param sparql.enabled Enable a default Sparql endpoint (WIP)
 sparql:
-  enabled: false
+  enabled: true
