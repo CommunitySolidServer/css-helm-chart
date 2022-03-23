@@ -41,7 +41,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | ------------------- | ------------------------------------------------ | ------------------------------- |
 | `image.registry`    | CSS image registry                               | `docker.io`                     |
 | `image.repository`  | CSS image repository                             | `solidproject/community-server` |
-| `image.tag`         | CSS image tag (immutable tags are recommended)   | `2.0.1`                         |
+| `image.tag`         | CSS image tag (immutable tags are recommended)   | `""`                            |
 | `image.pullPolicy`  | CSS image pull policy                            | `IfNotPresent`                  |
 | `image.pullSecrets` | Specify docker-registry secret names as an array | `[]`                            |
 
@@ -170,9 +170,3 @@ config:
     configMapName: my-configmap
     configMapKey: my-config.json
 ```
-
-## Workarounds for standing issues
-As of now, the login flow seems to only work over localhost. A temporary workaround to get going:
-
-Set `baseUrlOverride` to `http://localhost:3000/`, deploy and use port-forwarding to connect to your Solid App over localhost.
-`kubectl port-forward <css-pod> 3000:3000`

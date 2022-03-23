@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "css.fullname" . }}
+  name: {{ include "community-solid-server.fullname" . }}
   labels:
-    {{- include "css.labels" . | nindent 4 }}
+    {{- include "community-solid-server.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "css.selectorLabels" . | nindent 6 }}
+      {{- include "community-solid-server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -16,7 +16,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "css.selectorLabels" . | nindent 8 }}
+        {{- include "community-solid-server.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -36,14 +36,14 @@ spec:
             - "-l"
             - "{{ .Values.logLevel}}"
             - "-b"
-            - "{{ include "css.baseUrl" . }}"
+            - "{{ include "community-solid-server.baseUrl" . }}"
             {{- if .Values.showStacktrace }}
             - "-t"
             {{- end }}
             {{- with .Values.config}}
             - "-c"
             {{- if not .configMapName }}
-            - "@css:config/{{.bundled}}.json"
+            - "config/{{.bundled}}.json"
             {{- else }}
             - "/config/{{ .configMapKey }}"
             {{- end }}
@@ -88,7 +88,7 @@ spec:
       {{- else if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
         - name: data
           persistentVolumeClaim:
-            claimName: {{ include "css.fullname" . }}-data
+            claimName: {{ include "community-solid-server.fullname" . }}-data
       {{- end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:

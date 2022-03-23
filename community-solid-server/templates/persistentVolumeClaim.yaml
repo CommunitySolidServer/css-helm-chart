@@ -2,9 +2,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ include "css.fullname" . }}-data
+  name: {{ include "community-solid-server.fullname" . }}-data
   labels:
-    {{- include "css.labels" . | nindent 4 }}
+    {{- include "community-solid-server.labels" . | nindent 4 }}
 spec:
   storageClassName: {{ .Values.persistence.storageClassName }}
   accessModes:
