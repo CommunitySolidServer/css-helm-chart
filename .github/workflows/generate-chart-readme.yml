@@ -3,7 +3,7 @@ name: Check README metadata
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'community-solid-server/values.yaml'
 
