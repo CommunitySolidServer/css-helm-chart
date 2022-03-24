@@ -45,6 +45,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          cd css-helm-chart
           git config --global user.name "readme-generator"
           git config --global user.email "jasper.vaneessen@ugent.be"
           git add community-solid-server/README.md
