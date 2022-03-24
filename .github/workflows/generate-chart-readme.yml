@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'community-solid-server/values.yaml'
+    # paths:
+    #   - 'community-solid-server/values.yaml'
 
 jobs:
   check-readme-metadata:
@@ -36,12 +36,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Execute readme-generator-for-helm
-        run: readme-generator-for-helm/bin/index.js --values community-solid-server/values.yaml --readme community-solid-server/README.md
-      
-      - name: Commit and push changes
         run: |
-          git config --global user.name "readme-generator"
-          git config --global user.email "jasper.vaneessen@ugent.be"
-          git add community-solid-server/README.md
-          git commit -m "Update chart readme according to changes in values.yaml"
-          git push
+          ls readme
+          readme-generator-for-helm/bin/index.js --values community-solid-server/values.yaml --readme community-solid-server/README.md
+
+      # - name: Commit and push changes
+      #   run: |
+      #     git config --global user.name "readme-generator"
+      #     git config --global user.email "jasper.vaneessen@ugent.be"
+      #     git add community-solid-server/README.md
+      #     git commit -m "Update chart readme according to changes in values.yaml"
+      #     git push

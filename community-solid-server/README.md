@@ -1,11 +1,11 @@
 # Deploying Community Solid Server
 ## TL;DR
 ```
-helm repo add idlab-gent https://idlab-gent.github.io/css-helm-chart/charts/
-helm install my-css idlab-gent/css
+helm repo add community-solid-server https://communitysolidserver.github.io/css-helm-chart/charts/
+helm install my-css community-solid-server/community-solid-server
 ```
 ## Introduction
-This chart bootstraps a [Community Solid Server](https://github.com/solid/community-server) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart bootstraps a [Community Solid Server](https://github.com/CommunitySolidServer/CommunitySolidServer) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 - Kubernetes 1.19+
@@ -16,8 +16,8 @@ This chart bootstraps a [Community Solid Server](https://github.com/solid/commun
 To install the chart with the release name my-css:
 
 ```
-helm repo add idlab-gent https://idlab-gent.github.io/css-helm-chart/charts/
-helm install my-css idlab-gent/css
+helm repo add idlab-gent https://communitysolidserver.github.io/css-helm-chart/charts/
+helm install my-css community-solid-server/community-solid-server
 ```
 
 These commands deploy Community Solid Server on the Kubernetes cluster in the default configuration. The Parameters section lists the parameters that can be configured during installation.
