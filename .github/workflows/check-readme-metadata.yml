@@ -1,13 +1,20 @@
-name: Check README metadata
+name: Check and Update chart README
 
-on: push
-    # paths:
-    #   - 'community-solid-server/values.yaml'
+on: 
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '*/values.yaml'
+  push:
+    branches:
+      - main
+    paths:
+      - '*/values.yaml'
 
 jobs:
-  check-readme-metadata:
+  check-and-update-readme:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout bitnami-labs/readme-generator-for-helm
         uses: actions/checkout@v2
@@ -32,22 +39,19 @@ jobs:
       - name: Checkout css-helm-chart
         uses: actions/checkout@v2
         with:
-          path: css-helm-chart
+          path: charts
 
+      ## Can be made to check all charts (generic)
       - name: Execute readme-generator-for-helm
-        run: |
-          ls
-          echo "-"
-          ls readme-generator-for-helm
-          echo "-"
-          ls readme-generator-for-helm/bin
-          readme-generator-for-helm/bin/index.js --values css-helm-chart/community-solid-server/values.yaml --readme css-helm-chart/community-solid-server/README.md
+        run: readme-generator-for-helm/bin/index.js --values charts/community-solid-server/values.yaml --readme charts/community-solid-server/README.md
 
-      - name: Commit and push changes
+      - name: Commit readme
+        if: github.ref == 'refs/heads/main'
         run: |
-          cd css-helm-chart
-          git config --global user.name "readme-generator"
-          git config --global user.email "jasper.vaneessen@ugent.be"
+          cd charts
+          git config --global user.name 'Readme Generator'
+          git config --global user.email 'jasper.vaneessen@ugent.be'
           git add community-solid-server/README.md
-          git commit -m "Update chart readme according to changes in values.yaml"
+          git commit -am "docs: Update chart parameters readme"
           git push
+
