@@ -31,6 +31,8 @@ jobs:
 
       - name: Checkout css-helm-chart
         uses: actions/checkout@v2
+        with:
+          path: css-helm-chart
 
       - name: Execute readme-generator-for-helm
         run: |
@@ -39,12 +41,12 @@ jobs:
           ls readme-generator-for-helm
           echo "-"
           ls readme-generator-for-helm/bin
-          readme-generator-for-helm/bin/index.js --values community-solid-server/values.yaml --readme community-solid-server/README.md
+          readme-generator-for-helm/bin/index.js --values css-helm-chart/community-solid-server/values.yaml --readme css-helm-chart/community-solid-server/README.md
 
-      # - name: Commit and push changes
-      #   run: |
-      #     git config --global user.name "readme-generator"
-      #     git config --global user.email "jasper.vaneessen@ugent.be"
-      #     git add community-solid-server/README.md
-      #     git commit -m "Update chart readme according to changes in values.yaml"
-      #     git push
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "readme-generator"
+          git config --global user.email "jasper.vaneessen@ugent.be"
+          git add community-solid-server/README.md
+          git commit -m "Update chart readme according to changes in values.yaml"
+          git push
