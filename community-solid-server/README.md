@@ -101,16 +101,17 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ### Infrastructure parameters
 
-| Name                 | Description                                | Value |
-| -------------------- | ------------------------------------------ | ----- |
-| `resources.limits`   | The resources limits for CSS containers    | `{}`  |
-| `resources.requests` | The requested resources for CSS containers | `{}`  |
-| `podAnnotations`     | CSS Pod annotations                        | `{}`  |
-| `securityContext`    | Security Context for CSS Container         | `{}`  |
-| `podSecurityContext` | Security Context for CSS Pod               | `{}`  |
-| `nodeSelector`       | Node labels for pod assignment             | `{}`  |
-| `tolerations`        | Tolerations for pod assignment             | `[]`  |
-| `affinity`           | Affinity for pod assignment                | `{}`  |
+| Name                 | Description                                | Value   |
+| -------------------- | ------------------------------------------ | ------- |
+| `resources.limits`   | The resources limits for CSS containers    | `{}`    |
+| `resources.requests` | The requested resources for CSS containers | `{}`    |
+| `podAnnotations`     | CSS Pod annotations                        | `{}`    |
+| `securityContext`    | Security Context for CSS Container         | `{}`    |
+| `podSecurityContext` | Security Context for CSS Pod               | `{}`    |
+| `nodeSelector`       | Node labels for pod assignment             | `{}`    |
+| `tolerations`        | Tolerations for pod assignment             | `[]`    |
+| `affinity`           | Affinity for pod assignment                | `{}`    |
+| `sparql.enabled`     | Enable a default Sparql endpoint (WIP)     | `false` |
 
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
