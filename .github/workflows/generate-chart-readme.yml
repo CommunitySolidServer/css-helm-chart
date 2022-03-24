@@ -35,7 +35,9 @@ jobs:
       - name: Execute readme-generator-for-helm
         run: |
           ls
+          echo "-"
           ls readme-generator-for-helm
+          echo "-"
           ls readme-generator-for-helm/bin
           readme-generator-for-helm/bin/index.js --values community-solid-server/values.yaml --readme community-solid-server/README.md
 
