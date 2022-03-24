@@ -49,8 +49,8 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           cd charts
-          git config --global user.name 'Readme Generator'
-          git config --global user.email 'jasper.vaneessen@ugent.be'
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git add community-solid-server/README.md
           git commit -am "docs: Update chart parameters readme"
           git push
