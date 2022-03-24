@@ -1,9 +1,6 @@
 name: Check README metadata
 
-on:
-  push:
-    branches:
-      - main
+on: push
     # paths:
     #   - 'community-solid-server/values.yaml'
 
@@ -37,7 +34,9 @@ jobs:
 
       - name: Execute readme-generator-for-helm
         run: |
-          ls readme
+          ls
+          ls readme-generator-for-helm
+          ls readme-generator-for-helm/bin
           readme-generator-for-helm/bin/index.js --values community-solid-server/values.yaml --readme community-solid-server/README.md
 
       # - name: Commit and push changes
