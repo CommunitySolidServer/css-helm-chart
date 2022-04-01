@@ -68,14 +68,14 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ### Persistence parameters
 
-| Name                        | Description                                                                         | Value   |
-| --------------------------- | ----------------------------------------------------------------------------------- | ------- |
-| `persistence.enabled`       | Enable persistence on CSS using a `PersistentVolumeClaim`. If false, use emptyDir   | `false` |
-| `persistence.existingClaim` | Name of an existing `PersistentVolumeClaim` for CSS replicas                        | `""`    |
-| `persistence.subPath`       | Subdirectory of the volume to mount at (mostly useful when using an existing claim) | `""`    |
-| `persistence.storageClass`  | CSS persistent volume storage Class                                                 | `""`    |
-| `persistence.size`          | CSS persistent volume size                                                          | `128Mi` |
-| `persistence.selector`      | Selector to match an existing Persistent Volume                                     | `{}`    |
+| Name                           | Description                                                                         | Value   |
+| ------------------------------ | ----------------------------------------------------------------------------------- | ------- |
+| `persistence.enabled`          | Enable persistence on CSS using a `PersistentVolumeClaim`. If false, use emptyDir   | `false` |
+| `persistence.existingClaim`    | Name of an existing `PersistentVolumeClaim` for CSS replicas                        | `""`    |
+| `persistence.subPath`          | Subdirectory of the volume to mount at (mostly useful when using an existing claim) | `""`    |
+| `persistence.storageClassName` | CSS persistent volume storage Class                                                 | `""`    |
+| `persistence.size`             | CSS persistent volume size                                                          | `128Mi` |
+| `persistence.selector`         | Selector to match an existing Persistent Volume                                     | `{}`    |
 
 
 ### Kubernetes Service parameters
