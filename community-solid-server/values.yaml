@@ -74,7 +74,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: ""
+  storageClassName: ""
   ## @param persistence.size CSS persistent volume size
   ##
   size: 128Mi
