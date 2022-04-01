@@ -67,7 +67,7 @@ persistence:
   ## @param persistence.subPath Subdirectory of the volume to mount at (mostly useful when using an existing claim)
   ##
   subPath: ""
-  ## @param persistence.storageClass CSS persistent volume storage Class
+  ## @param persistence.storageClassName CSS persistent volume storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
   ## If undefined (the default) or set to null, no storageClassName spec is
