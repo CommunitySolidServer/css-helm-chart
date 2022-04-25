@@ -68,8 +68,8 @@ Pass a correct baseUrl
 {{- if .Values.baseUrlOverride }}
 {{- .Values.baseUrlOverride }}
 {{- else if .Values.ingress.enabled }}
-{{- printf "https://%s%s" .Values.ingress.host .Values.ingress.path}}
+{{- printf "http://%s%s" .Values.ingress.host .Values.ingress.path}}
 {{- else }}
-{{- printf "%http://%s.%s/" .Release.Namespace ( include "community-solid-server.fullname" . ) }}
+{{- printf "http://%s.%s/" ( include "community-solid-server.fullname" . ) .Release.Namespace }}
 {{- end }}
 {{- end }}
