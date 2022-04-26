@@ -63,7 +63,9 @@ The command removes all the Kubernetes components associated with the chart and 
 | `config.configMapKey`  | Key for the configfile to be used from the configMap                                                                                                                | `""`      |
 | `logLevel`             | Log level: silly, debug, verbose, info, warn, error                                                                                                                 | `info`    |
 | `showStacktrace`       | Enables detailed logging on error pages.                                                                                                                            | `false`   |
+| `sparqlEndpoint`       | URL of the SPARQL endpoints when using a quadstore-based configuration                                                                                              | `""`      |
 | `baseUrlOverride`      | From the helm config, an appropriate --baseUrl value will be passed to the community server. If however you wish to override this set this parameter appropriately. | `""`      |
+| `customParameters`     | An array of `flag` `value` pairs to be added to the CSS cli command for custom parameters/overwrites.                                                               | `[]`      |
 
 
 ### Persistence parameters
