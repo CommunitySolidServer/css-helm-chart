@@ -52,6 +52,10 @@ spec:
             - "-f"
             - "/data/"
             {{- end }}
+            {{- range $val := .Values.customParameters }}
+            - {{ $val.flag | quote }}
+            - {{ $val.value | quote }}
+            {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
