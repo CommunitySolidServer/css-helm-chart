@@ -98,7 +98,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `ingress.path`             | Default path for the ingress resource                                                                                            | `/`         |
 | `ingress.annotations`      | Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations. | `{}`        |
 | `ingress.tls`              | TLS Configuration                                                                                                                | `[]`        |
-| `ingress.ingressClassName` | IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)                                                    | `""`        |
+| `ingress.className` | IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)                                                    | `""`        |
 
 
 ### Infrastructure parameters
