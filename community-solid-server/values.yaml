@@ -137,9 +137,9 @@ ingress:
   ## @param ingress.tls TLS Configuration
     ##
   tls: []
-  ## @param ingress.className IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)
+  ## @param ingress.ingressClassName IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)
   ##
-  className: ""
+  ingressClassName: ""
 
 ## @section Infrastructure parameters
 ## CSS containers' resource requests and limits
