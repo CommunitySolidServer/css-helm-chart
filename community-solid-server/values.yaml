@@ -53,12 +53,24 @@ sparqlEndpoint: ""
 ## @param baseUrlOverride From the helm config, an appropriate --baseUrl value will be passed to the community server. If however you wish to override this set this parameter appropriately.
 baseUrlOverride: ""
 
+## @param multithreading.enabled Run in multithreaded mode using workers.
+## See [CSS - Multithreading](https://github.com/CommunitySolidServer/CommunitySolidServer#-multithreading).
+## @param multithreading.threads define how many threads to use, special values: -1 (num_cores-1) and 0 (num_cores)
+multithreading:
+  enabled: false
+  threads: "-1"
+
 ## @param customParameters An array of `flag` `value` pairs to be added to the CSS cli command for custom parameters/overwrites.
 customParameters: []
   # - flag: --serverKey
   #   value: server.key
   # - flag: --serverCert
   #   value: server.cert
+
+## @param Array of `name` and `value` pairs to be passed as environment variables to the CSS.
+## See [CSS - Environment Variables](https://github.com/CommunitySolidServer/CommunitySolidServer#%EF%B8%8F-environment-variables).
+environmentVariables: []
+
 
 ## @section Persistence parameters
 ## Enable persistence using Persistent Volume Claims
