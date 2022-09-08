@@ -73,8 +73,6 @@ env: []
 # - name: CSS_LOGGING_LEVEL
 #   value: debug
 
-
-
 ## @section Persistence parameters
 ## Enable persistence using Persistent Volume Claims
 ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
