@@ -67,7 +67,7 @@ customParameters: []
 # - flag: --serverCert
 #   value: server.cert
 
-## @param Array of `name: ""` and `value: ""` pairs to be passed as environment variables to the CSS.
+## @param env Array of `name: ""` and `value: ""` pairs to be passed as environment variables to the CSS.
 ## See [CSS - Environment Variables](https://github.com/CommunitySolidServer/CommunitySolidServer#%EF%B8%8F-environment-variables).
 env: []
 # - name: CSS_LOGGING_LEVEL
