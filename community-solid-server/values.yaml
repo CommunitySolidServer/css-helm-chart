@@ -62,14 +62,17 @@ multithreading:
 
 ## @param customParameters An array of `flag` `value` pairs to be added to the CSS cli command for custom parameters/overwrites.
 customParameters: []
-  # - flag: --serverKey
-  #   value: server.key
-  # - flag: --serverCert
-  #   value: server.cert
+# - flag: --serverKey
+#   value: server.key
+# - flag: --serverCert
+#   value: server.cert
 
-## @param Array of `name` and `value` pairs to be passed as environment variables to the CSS.
+## @param Array of `name: ""` and `value: ""` pairs to be passed as environment variables to the CSS.
 ## See [CSS - Environment Variables](https://github.com/CommunitySolidServer/CommunitySolidServer#%EF%B8%8F-environment-variables).
-environmentVariables: []
+env: []
+# - name: CSS_LOGGING_LEVEL
+#   value: debug
+
 
 
 ## @section Persistence parameters

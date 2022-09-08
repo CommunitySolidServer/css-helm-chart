@@ -18,6 +18,7 @@ spec:
       labels:
         {{- include "community-solid-server.selectorLabels" . | nindent 8 }}
     spec:
+      enableServiceLinks: false
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -52,16 +53,19 @@ spec:
             - "-f"
             - "/data/"
             {{- end }}
-          #   {{- if .Values.multithreading.enabled }}
-          #   - "-w"
-          #   - {{ .Values.multithreading.threads | quote }}
-          #   {{- end }}
-          #   {{- range $val := .Values.customParameters }}
-          #   - {{ $val.flag | quote }}
-          #   - {{ $val.value | quote }}
-          #   {{- end }}
-          # env:
-          #   {{ .Values.env | nindent 12 }}
+            {{- if .Values.multithreading.enabled }}
+            - "-w"
+            - {{ .Values.multithreading.threads | quote }}
+            {{- end }}
+            {{- range $val := .Values.customParameters }}
+            - {{ $val.flag | quote }}
+            - {{ $val.value | quote }}
+            {{- end }}
+          env:
+            {{- range $val := .Values.env }}
+            - name: {{ $val.name | quote}}
+              value: {{ $val.value | quote}}
+            {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
