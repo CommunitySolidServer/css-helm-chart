@@ -3,7 +3,7 @@
 ## TL;DR
 
 ```bash
-helm repo add community-solid-server https://communitysolidserver.github.io/css-helm-chart/charts/
+helm repo add community-solid-server https://communitysolidserver.github.io/css-helm-chart/
 helm install my-css community-solid-server/community-solid-server
 ```
 
@@ -22,7 +22,7 @@ This chart bootstraps a [Community Solid Server](https://github.com/CommunitySol
 To install the chart with the release name my-css:
 
 ```bash
-helm repo add idlab-gent https://communitysolidserver.github.io/css-helm-chart/charts/
+helm repo add community-solid-server https://communitysolidserver.github.io/css-helm-chart/
 helm install my-css community-solid-server/community-solid-server
 ```
 
