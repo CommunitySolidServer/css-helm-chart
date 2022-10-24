@@ -55,7 +55,7 @@ spec:
             {{- end }}
             {{- if .Values.multithreading.enabled }}
             - "-w"
-            - {{ .Values.multithreading.threads | quote }}
+            - {{ .Values.multithreading.workers | quote }}
             {{- end }}
             {{- range $val := .Values.customParameters }}
             - {{ $val.flag | quote }}

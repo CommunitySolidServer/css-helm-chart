@@ -55,10 +55,10 @@ baseUrlOverride: ""
 
 ## @param multithreading.enabled Run in multithreaded mode using workers.
 ## See [CSS - Multithreading](https://github.com/CommunitySolidServer/CommunitySolidServer#-multithreading).
-## @param multithreading.threads define how many threads to use, special values: -1 (num_cores-1) and 0 (num_cores)
+## @param multithreading.workers define how many worker threads to use, special values: -1 (num_cores-1) and 0 (num_cores)
 multithreading:
   enabled: false
-  threads: "-1"
+  workers: "-1"
 
 ## @param customParameters An array of `flag` `value` pairs to be added to the CSS cli command for custom parameters/overwrites.
 customParameters: []

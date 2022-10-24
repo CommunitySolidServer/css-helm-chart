@@ -10,7 +10,7 @@ spec:
     {{- if (eq "-" .Values.server.persistentVolume.storageClass) }}
       storageClassName: ""
     {{- else }}
-      storageClassName: "{{ .Values.server.persistentVolume.storageClass }}"
+      storageClassName: "{{ .Values.server.persistentVolume.storageClassName }}"
     {{- end }}
   {{- end }}
   accessModes:
