@@ -21,9 +21,9 @@ version: 3.0.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "5.0.0"
+appVersion: "6.0.2"
 
-home: https://github.com/idlab-gent/css-helm-chart
+home: https://github.com/CommunitySolidServer/css-helm-chart
 icon: https://raw.githubusercontent.com/solid/community-server/main/templates/images/solid.svg
 keywords:
   - solid
@@ -32,4 +32,4 @@ maintainers:
   - email: jasper.vaneessen@gmail.com
     name: MisterTimn
 sources:
-  - https://github.com/solid/community-server
+  - https://github.com/CommunitySolidServer/CommunitySolidServer
