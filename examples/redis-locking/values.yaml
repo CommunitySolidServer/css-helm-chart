@@ -1,0 +1,13 @@
+config:
+  configMapKey: config.json
+  configMapName: css-redis-file
+logLevel: info
+multithreading:
+  enabled: true
+  workers: 4
+persistence:
+  enabled: true
+  size: 512Mi
+env:
+  - name: CSS_REDIS_URI
+    value: css-redis-master:6379
