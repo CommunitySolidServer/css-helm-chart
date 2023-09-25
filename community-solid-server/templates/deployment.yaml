@@ -18,6 +18,7 @@ spec:
       labels:
         {{- include "community-solid-server.selectorLabels" . | nindent 8 }}
     spec:
+      enableServiceLinks: false
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -30,9 +31,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           {{- $appVersion := .Chart.AppVersion -}}
           {{- with .Values.image }}
-          image: "{{.registry}}/{{ .repository }}:{{ .tag | default $appVersion }}"
-          {{- end}}
-          args: 
+          image: "{{.registry}}/{{ .repository }}:{{ default $appVersion .tag }}"
+          {{- end }}
+          args:
             - "-l"
             - "{{ .Values.logLevel}}"
             - "-b"
@@ -43,7 +44,7 @@ spec:
             {{- with .Values.config}}
             - "-c"
             {{- if not .configMapName }}
-            - "config/{{.bundled}}.json"
+            - "config/{{ .bundled }}.json"
             {{- else }}
             - "/config/{{ .configMapKey }}"
             {{- end }}
@@ -52,9 +53,18 @@ spec:
             - "-f"
             - "/data/"
             {{- end }}
+            {{- if .Values.multithreading.enabled }}
+            - "-w"
+            - {{ .Values.multithreading.workers | quote }}
+            {{- end }}
             {{- range $val := .Values.customParameters }}
             - {{ $val.flag | quote }}
             - {{ $val.value | quote }}
+            {{- end }}
+          env:
+            {{- range $val := .Values.env }}
+            - name: {{ $val.name | quote}}
+              value: {{ $val.value | quote}}
             {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

@@ -6,7 +6,13 @@ metadata:
   labels:
     {{- include "community-solid-server.labels" . | nindent 4 }}
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
+  {{- if .Values.persistence.storageClassName }}
+    {{- if (eq "-" .Values.persistence.storageClassName) }}
+  storageClassName: ""
+    {{- else }}
+  storageClassName: {{ .Values.persistence.storageClassName | quote }}
+    {{- end }}
+  {{- end }}
   accessModes:
     - ReadWriteOnce
   resources:
