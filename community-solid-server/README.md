@@ -52,6 +52,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `image.pullPolicy`  | CSS image pull policy                            | `IfNotPresent`                  |
 | `image.pullSecrets` | Specify docker-registry secret names as an array | `[]`                            |
 
+
 ### Common parameters
 
 | Name               | Description                               | Value |
@@ -59,18 +60,23 @@ The command removes all the Kubernetes components associated with the chart and 
 | `nameOverride`     | String to partially override css.fullname | `""`  |
 | `fullnameOverride` | String to fully override css.fullname     | `""`  |
 
+
 ### Community Solid Server parameters
 
-| Name                   | Description                                                                                                                                                         | Value     |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `config.bundled`       | Use one of the bundled configs (options: default, file, sparlql-endpoint, etc.)                                                                                     | `default` |
-| `config.configMapName` | Name of configMap holding a custom css config                                                                                                                       | `""`      |
-| `config.configMapKey`  | Key for the configfile to be used from the configMap                                                                                                                | `""`      |
-| `logLevel`             | Log level: silly, debug, verbose, info, warn, error                                                                                                                 | `info`    |
-| `showStacktrace`       | Enables detailed logging on error pages.                                                                                                                            | `false`   |
-| `sparqlEndpoint`       | URL of the SPARQL endpoints when using a quadstore-based configuration                                                                                              | `""`      |
-| `baseUrlOverride`      | From the helm config, an appropriate --baseUrl value will be passed to the community server. If however you wish to override this set this parameter appropriately. | `""`      |
-| `customParameters`     | An array of `flag` `value` pairs to be added to the CSS cli command for custom parameters/overwrites.                                                               | `[]`      |
+| Name                     | Description                                                                                                                                                         | Value     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `config.bundled`         | Use one of the bundled configs (options: default, file, sparlql-endpoint, etc.)                                                                                     | `default` |
+| `config.configMapName`   | Name of configMap holding a custom css config                                                                                                                       | `""`      |
+| `config.configMapKey`    | Key for the configfile to be used from the configMap                                                                                                                | `""`      |
+| `logLevel`               | Log level: silly, debug, verbose, info, warn, error                                                                                                                 | `info`    |
+| `showStacktrace`         | Enables detailed logging on error pages.                                                                                                                            | `false`   |
+| `sparqlEndpoint`         | URL of the SPARQL endpoints when using a quadstore-based configuration                                                                                              | `""`      |
+| `baseUrlOverride`        | From the helm config, an appropriate --baseUrl value will be passed to the community server. If however you wish to override this set this parameter appropriately. | `""`      |
+| `multithreading.enabled` | Run in multithreaded mode using workers.                                                                                                                            | `false`   |
+| `multithreading.workers` | define how many worker threads to use, special values: -1 (num_cores-1) and 0 (num_cores)                                                                           | `-1`      |
+| `customParameters`       | An array of `flag` `value` pairs to be added to the CSS cli command for custom parameters/overwrites.                                                               | `[]`      |
+| `env`                    | Array of `name: ""` and `value: ""` pairs to be passed as environment variables to the CSS.                                                                         | `[]`      |
+
 
 ### Persistence parameters
 
@@ -83,6 +89,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `persistence.size`             | CSS persistent volume size                                                          | `128Mi` |
 | `persistence.selector`         | Selector to match an existing Persistent Volume                                     | `{}`    |
 
+
 ### Kubernetes Service parameters
 
 | Name               | Description                                                                     | Value       |
@@ -90,6 +97,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `service.type`     | CSS Kubernetes service type                                                     | `ClusterIP` |
 | `service.port`     | CSS Kubernetes service port                                                     | `80`        |
 | `service.nodePort` | CSS Kubernetes service node port, only relevant when service.type == `NodePort` | `""`        |
+
 
 ### Ingress resource parameters
 
@@ -101,6 +109,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `ingress.annotations`      | Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations. | `{}`        |
 | `ingress.tls`              | TLS Configuration                                                                                                                | `[]`        |
 | `ingress.ingressClassName` | IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)                                                    | `""`        |
+
 
 ### Infrastructure parameters
 
@@ -115,7 +124,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | `tolerations`        | Tolerations for pod assignment             | `[]`  |
 | `affinity`           | Affinity for pod assignment                | `{}`  |
 
-# Configuration and Installation details
 
 ## Using a bundled config
 
